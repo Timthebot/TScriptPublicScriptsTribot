@@ -5,7 +5,7 @@ This repository contains all public, open-sourced scripts by [TScripts](https://
 # Scripts
 
 ## Contents
-- [TLumbSpinner](#TLumbSpinner) - Spins Flax in Lumbridge castle
+- [TLumbSpinner](#tlumbspinner) - Spins Flax in Lumbridge castle
 
 ## Details
 
