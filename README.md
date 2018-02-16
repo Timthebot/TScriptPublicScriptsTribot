@@ -18,3 +18,8 @@ Requirements
 - Have Flax in bank
 - Be anywhere upstairs in Lumbridge 
 
+Bugs
+
+- No bugs currently reported
+
+[Submit a bug report](https://github.com/Timthebot/TScriptPublicScriptsTribot/issues/new?title=[TLumbSpinner])
