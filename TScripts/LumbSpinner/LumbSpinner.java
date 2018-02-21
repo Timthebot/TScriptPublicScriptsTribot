@@ -23,6 +23,7 @@ public class LumbSpinner extends TScript implements Painting, Starting, Ending {
         ABCUtil abc2 = new ABCUtil();
 
         nodes.add(new ManageRun(abc2));
+        nodes.add(new ClimbUpStairs(abc2));
         nodes.add(new CloseSpinInterface(abc2));
         nodes.add(new IsSpinning(abc2));
         nodes.add(new OpenSpinInterface(abc2));
