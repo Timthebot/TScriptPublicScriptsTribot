@@ -1,8 +1,10 @@
 package scripts.TScripts.LumbSpinner;
 
 import org.tribot.api.General;
+import org.tribot.api.Timing;
 import org.tribot.api.types.generic.Condition;
 import org.tribot.api.util.abc.ABCUtil;
+import org.tribot.api2007.Interfaces;
 import org.tribot.api2007.Inventory;
 import org.tribot.api2007.Objects;
 import org.tribot.api2007.Player;
@@ -24,14 +26,14 @@ abstract class TSpinNode extends TNode {
             4);
 
 
-    static void openDoorIfNeeded() {
+    void openDoorIfNeeded() {
         RSObject[] openableDoors = Objects.find(10, "Door");
         for (RSObject door : openableDoors) {
             RSTile pos = door.getPosition();
             if (pos.getX() == 3207 && pos.getY() == 3214) {
                 System.out.println("Opening the doors!");
                 Doors.handleDoor(door, true);
-                General.sleep(600);
+                Timing.waitCondition(isDoorOpen, General.random(2000, 5000));
             }
         }
     }
@@ -62,6 +64,21 @@ abstract class TSpinNode extends TNode {
         public boolean active() {
             General.sleep(100);
             return getFloorInLumbCastle() == 2;
+        }
+    };
+
+    final Condition isDoorOpen = new Condition() {
+        @Override
+        public boolean active() {
+            General.sleep(100);
+            RSObject[] openableDoors = Objects.find(10, "Door");
+            for (RSObject door : openableDoors) {
+                RSTile pos = door.getPosition();
+                if (pos.getX() == 3207 && pos.getY() == 3214) {
+                    return false;
+                }
+            }
+            return true;
         }
     };
 
