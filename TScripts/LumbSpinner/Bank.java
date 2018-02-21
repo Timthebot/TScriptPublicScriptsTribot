@@ -16,7 +16,7 @@ public class Bank extends TSpinNode {
     @Override
     public boolean validate() {
         RSItem[] flaxInInv = Inventory.find(1779);
-        return getLocation() == 2 && flaxInInv.length == 0;
+        return getFloorInLumbCastle() == 2 && flaxInInv.length == 0;
     }
 
     @Override
@@ -25,28 +25,23 @@ public class Bank extends TSpinNode {
             if (Inventory.getAll().length > 0) {
                 Banking.depositAll();
             }
-            if (Banking.withdraw(50, "Flax")) {
-                Timing.waitCondition(new Condition() {
-                    @Override
-                    public boolean active() {
-                        General.sleep(100);
-                        RSItem[] flaxInInv = Inventory.find("Flax");
-                        return flaxInInv.length > 0;
-                    }
-                }, General.random(1000, 4000));
+            if (Banking.withdraw(0, "Flax")) {
+                Timing.waitCondition(waitTillNoFlax, General.random(1000, 4000));
             } else {
-                System.out.println("Encountered problem banking");
+                System.err.println("Encountered problem banking");
             }
         } else {
             Banking.openBank();
-            Timing.waitCondition(new Condition() {
-                @Override
-                public boolean active() {
-                    General.sleep(100);
-                    return Banking.isBankScreenOpen();
-                }
-            }, General.random(1000, 2000));
+            Timing.waitCondition(isBankOpen, General.random(1000, 2000));
         }
-
     }
+
+    static final Condition isBankOpen = new Condition() {
+        @Override
+        public boolean active() {
+            General.sleep(100);
+            return Banking.isBankScreenOpen();
+        }
+    };
+
 }

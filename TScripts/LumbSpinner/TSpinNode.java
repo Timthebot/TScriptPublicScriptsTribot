@@ -1,22 +1,30 @@
 package scripts.TScripts.LumbSpinner;
 
 import org.tribot.api.General;
+import org.tribot.api.types.generic.Condition;
 import org.tribot.api.util.abc.ABCUtil;
+import org.tribot.api2007.Inventory;
 import org.tribot.api2007.Objects;
 import org.tribot.api2007.Player;
 import org.tribot.api2007.ext.Doors;
-import org.tribot.api2007.types.RSObject;
-import org.tribot.api2007.types.RSTile;
+import org.tribot.api2007.types.*;
 import scripts.TScripts.core.TNode;
 
 import java.awt.*;
 
-public abstract class TSpinNode extends TNode {
-    public TSpinNode(String status, ABCUtil abc2) {
+abstract class TSpinNode extends TNode {
+    TSpinNode(String status, ABCUtil abc2) {
         super(status, abc2);
     }
 
-    public static void openDoorIfNeeded() {
+
+    private Polygon lumbTopFloors = new Polygon(
+            new int[]{3205, 3214, 3214, 3205},
+            new int[]{3229, 3229, 3208, 3208},
+            4);
+
+
+    static void openDoorIfNeeded() {
         RSObject[] openableDoors = Objects.find(10, "Door");
         for (RSObject door : openableDoors) {
             RSTile pos = door.getPosition();
@@ -28,7 +36,7 @@ public abstract class TSpinNode extends TNode {
         }
     }
 
-    public int getLocation() {
+    int getFloorInLumbCastle() {
         // Returns 2 if on the top floor, 1 if on the spinning floor
         // 0 if on the ground floor or -1 if elsewhere.
         RSTile pos = Player.getPosition();
@@ -39,8 +47,45 @@ public abstract class TSpinNode extends TNode {
         }
     }
 
-    private Polygon lumbTopFloors = new Polygon(
-            new int[]{3205, 3214, 3214, 3205},
-            new int[]{3229, 3229, 3208, 3208},
-            4);
+    // Wait conditions
+    final Condition waitTillNoFlax = new Condition() {
+        @Override
+        public boolean active() {
+            General.sleep(100);
+            RSItem[] flaxInInv = Inventory.find("Flax");
+            return flaxInInv.length > 0;
+        }
+    };
+
+    final Condition isOnTopFloor = new Condition() {
+        @Override
+        public boolean active() {
+            General.sleep(100);
+            return getFloorInLumbCastle() == 2;
+        }
+    };
+
+    final Condition isOnSpinFloor = new Condition() {
+        @Override
+        public boolean active() {
+            General.sleep(100);
+            return getFloorInLumbCastle() == 1;
+        }
+    };
+
+    final Condition isAnimating = new Condition() {
+        @Override
+        public boolean active() {
+            General.sleep(100);
+            return Player.getAnimation() != -1;
+        }
+    };
+
+    final Condition isNotAnimating = new Condition() {
+        @Override
+        public boolean active() {
+            General.sleep(100);
+            return Player.getAnimation() == -1;
+        }
+    };
 }

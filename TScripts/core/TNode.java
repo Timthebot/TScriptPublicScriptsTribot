@@ -9,6 +9,8 @@ import org.tribot.api2007.Player;
 import org.tribot.api2007.Walking;
 
 public abstract class TNode extends TTask {
+    // The basis of all scripts, nodes execute once they are validated. The order they appear in their relevant
+    // nodemaster determines their priority.
 
     public TNode(String status, ABCUtil abc2) {
         super(status, abc2);

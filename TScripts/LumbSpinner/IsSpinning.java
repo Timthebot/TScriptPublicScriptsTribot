@@ -27,21 +27,9 @@ public class IsSpinning extends TSpinNode {
         RSItem[] flaxLeft = Inventory.find("Flax");
         if (flaxLeft.length > 1) {
             // We still have move flax to go, so wait for animation to go -1
-            Timing.waitCondition(new Condition() {
-                @Override
-                public boolean active() {
-                    General.sleep(100);
-                    return Player.getAnimation() == -1;
-                }
-            }, General.random(1000, 3000));
+            Timing.waitCondition(isNotAnimating, General.random(1000, 3000));
             // Sleep until spinning again
-            Timing.waitCondition(new Condition() {
-                @Override
-                public boolean active() {
-                    General.sleep(100);
-                    return Player.getAnimation() != -1;
-                }
-            }, General.random(1000, 3000));
+            Timing.waitCondition(isAnimating, General.random(1000, 3000));
         } else {
             // Hover the stairs to go-up quickly
             RSObject[] stairs = Objects.findNearest(20, "Staircase");
@@ -53,16 +41,10 @@ public class IsSpinning extends TSpinNode {
                 } else {
                     Camera.turnToTile(staircase);
                 }
+
+                Timing.waitCondition(waitTillNoFlax, General.random(1000, 3000));
+                staircase.click("Climb-up");
             }
-            Timing.waitCondition(new Condition() {
-                @Override
-                public boolean active() {
-                    General.sleep(100);
-                    RSItem[] flax = Inventory.find("Flax");
-                    return flax.length == 0;
-                }
-            }, General.random(1000, 3000));
-            stairs[0].click("Climb-up");
         }
 
     }
