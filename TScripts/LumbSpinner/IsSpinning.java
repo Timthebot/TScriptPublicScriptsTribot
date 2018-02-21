@@ -33,7 +33,6 @@ public class IsSpinning extends TSpinNode {
         } else {
             // Hover the stairs to go-up quickly
             RSObject[] stairs = Objects.findNearest(20, "Staircase");
-            System.out.println("Hovering stairs");
             if (stairs.length > 0) {
                 RSObject staircase = stairs[0];
                 if (staircase.isOnScreen()) {
