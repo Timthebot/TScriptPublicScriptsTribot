@@ -4,7 +4,9 @@ import org.tribot.api.Timing;
 import org.tribot.api.util.abc.ABCUtil;
 import org.tribot.api2007.Skills;
 import org.tribot.script.ScriptManifest;
+import org.tribot.script.interfaces.Ending;
 import org.tribot.script.interfaces.Painting;
+import org.tribot.script.interfaces.Starting;
 import scripts.TScripts.core.TScript;
 
 import java.awt.*;
@@ -13,9 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @ScriptManifest(authors = {"TScripts"}, name = "TLumbSpinner", description = "Spins flax in lumbridge", version = 1.0, category = "Crafting")
-public class LumbSpinner extends TScript implements Painting {
+public class LumbSpinner extends TScript implements Painting, Starting, Ending {
     @Override
-    public void start() {
+    public void onStart() {
         // Executes once at the start
 
         ABCUtil abc2 = new ABCUtil();
@@ -33,11 +35,6 @@ public class LumbSpinner extends TScript implements Painting {
     }
 
     @Override
-    public void stop() {
-        System.out.println("Bye");
-    }
-
-    @Override
     public void mainloop() {
         // The main loop
         for (TSpinNode node : nodes) {
@@ -49,12 +46,11 @@ public class LumbSpinner extends TScript implements Painting {
         }
     }
 
-
     List<TSpinNode> nodes = new ArrayList<>();
 
-    long startTime;
-    int startCraftXp;
-    Font font = new Font("Verdana", Font.BOLD, 14);
+    private long startTime;
+    private int startCraftXp;
+    private final Font font = new Font("Verdana", Font.BOLD, 14);
 
     @Override
     public void onPaint(Graphics g) {
@@ -79,4 +75,9 @@ public class LumbSpinner extends TScript implements Painting {
     }
 
     private String status = "Initialising";
+
+    @Override
+    public void onEnd() {
+        System.out.println("Thank you for using TLumbSpinner!");
+    }
 }

@@ -3,6 +3,8 @@ package scripts.TScripts.core;
 import org.tribot.api.util.abc.ABCUtil;
 
 public abstract class TTask {
+    // A Task simply has an execute method and is somewhat rarely used, only for a set of linear tasks that don't
+    // require validation. TNode should be used more frequently.
 
     public TTask(String status, ABCUtil abc2) {
         this.status = status;
@@ -12,7 +14,8 @@ public abstract class TTask {
     public abstract void execute();
 
     public void idle() {
-        // TODO:: Implement ABC2
+        // Any method that can idle should call the idle() method, which implements abc2
+        // see https://tribot.org/forums/topic/60720-guide-to-implementing-abc2/
 
         if (this.abc_util.shouldCheckTabs())
             this.abc_util.checkTabs();
@@ -37,7 +40,6 @@ public abstract class TTask {
 
         if (this.abc_util.shouldLeaveGame())
             this.abc_util.leaveGame();
-
     }
 
     public String getStatus() {

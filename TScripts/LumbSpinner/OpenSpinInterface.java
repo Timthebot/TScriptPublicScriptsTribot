@@ -19,30 +19,34 @@ public class OpenSpinInterface extends TSpinNode {
     public boolean validate() {
         RSItem[] items = Inventory.find("Flax");
         RSInterfaceChild inter = Interfaces.get(459, 1);
-        return getLocation() == 1 && items.length > 0 && (inter == null || inter.isHidden()) && Player.getAnimation() == -1;
+        return getFloorInLumbCastle() == 1 && items.length > 0 && (inter == null || inter.isHidden()) && Player.getAnimation() == -1;
     }
+
+    private static final RSTile walkToWheel = new RSTile(3209, 3213, 1);
 
     @Override
     public void execute() {
         openDoorIfNeeded();
-        walkToIfNeeded(new RSTile(3209, 3213, 1));
+        walkToIfNeeded(walkToWheel);
         RSObject[] wheels = Objects.findNearest(10, "Spinning wheel");
         if (wheels.length > 0) {
             wheels[0].click("Spin");
-            Timing.waitCondition(new Condition() {
-                @Override
-                public boolean active() {
-                    General.sleep(100); // Sleep to reduce CPU usage.
-                    RSInterfaceChild inter = Interfaces.get(459, 1);
-                    if (inter != null && !inter.isHidden()) {
-                        RSInterfaceComponent child = inter.getChild(1);
-                        return (child != null &&
-                            inter.getChild(1).getText().contains("What would you like to spin"));
-                    } else {
-                        return false;
-                    }
-                }
-            }, General.random(2000, 3300));
+            Timing.waitCondition(waitForInterface, General.random(2000, 3300));
         }
     }
+
+    private final Condition waitForInterface = new Condition() {
+        @Override
+        public boolean active() {
+            General.sleep(100); // Sleep to reduce CPU usage.
+            RSInterfaceChild inter = Interfaces.get(459, 1);
+            if (inter != null && !inter.isHidden()) {
+                RSInterfaceComponent child = inter.getChild(1);
+                return (child != null &&
+                        inter.getChild(1).getText().contains("What would you like to spin"));
+            } else {
+                return false;
+            }
+        }
+    };
 }

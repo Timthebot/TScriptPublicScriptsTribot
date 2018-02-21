@@ -18,22 +18,18 @@ public class GoToSpinWheel extends TSpinNode {
     @Override
     public boolean validate() {
         RSItem[] flaxInInv = Inventory.find(1779);
-        return flaxInInv.length == 28 && getLocation() == 2;
+        return flaxInInv.length == 28 && getFloorInLumbCastle() == 2;
     }
 
+    private static final RSTile target = new RSTile(3205, 3209, 2);
     @Override
     public void execute() {
-        RSTile target = new RSTile(3205, 3209, 2);
         walkToIfNeeded(target);
-        RSObject[] stairs = Objects.findNearest(30, "Staircase");
-        stairs[0].click("Climb-down");
-        idle();
-        Timing.waitCondition(new Condition() {
-            @Override
-            public boolean active() {
-                General.sleep(100);
-                return getLocation() == 1;
-            }
-        }, General.random(1000, 4000));
+        RSObject[] stairs = Objects.findNearest(15, "Staircase");
+        if (stairs.length > 0) {
+            stairs[0].click("Climb-down");
+            idle();
+            Timing.waitCondition(isOnSpinFloor, General.random(1000, 4000));
+        }
     }
 }
