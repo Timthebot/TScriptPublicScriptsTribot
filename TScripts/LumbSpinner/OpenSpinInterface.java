@@ -30,8 +30,9 @@ public class OpenSpinInterface extends TSpinNode {
         walkToIfNeeded(walkToWheel);
         RSObject[] wheels = Objects.findNearest(10, "Spinning wheel");
         if (wheels.length > 0) {
-            wheels[0].click("Spin");
-            Timing.waitCondition(waitForInterface, General.random(2000, 3300));
+            if (wheels[0].click("Spin")) {
+                Timing.waitCondition(waitForInterface, General.random(2000, 3300));
+            }
         }
     }
 

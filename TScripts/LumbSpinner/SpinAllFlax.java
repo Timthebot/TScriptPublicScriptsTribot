@@ -25,8 +25,9 @@ public class SpinAllFlax extends TSpinNode {
     public void execute() {
         RSInterfaceChild inter = Interfaces.get(459, 4);
         if (inter != null) {
-            inter.click("Spin-All");
-            Timing.waitCondition(isAnimating, General.random(1000, 3000));
+            if (inter.click("Spin-All")) {
+                Timing.waitCondition(isAnimating, General.random(1000, 3000));
+            }
         }
     }
 }

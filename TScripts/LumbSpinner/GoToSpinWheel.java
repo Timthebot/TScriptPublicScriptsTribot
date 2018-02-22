@@ -27,9 +27,10 @@ public class GoToSpinWheel extends TSpinNode {
         walkToIfNeeded(target);
         RSObject[] stairs = Objects.findNearest(15, "Staircase");
         if (stairs.length > 0) {
-            stairs[0].click("Climb-down");
-            idle();
-            Timing.waitCondition(isOnSpinFloor, General.random(1000, 4000));
+            if (stairs[0].click("Climb-down")) {
+                idle();
+                Timing.waitCondition(isOnSpinFloor, General.random(1000, 4000));
+            }
         }
     }
 }
