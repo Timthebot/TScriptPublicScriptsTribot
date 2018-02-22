@@ -10,13 +10,10 @@ This repository contains all public, open-sourced scripts by [TScripts](https://
 ## Details
 
 ### TLumbSpinner
-Current version: v1.1
 
 #### Usage
 
-- [Download the latest jar](https://www.dropbox.com/s/mi0uefmynuxj1ga/TLumbSpinner.jar?dl=1)
-- Extract the jar into your scripts folder
-- Start the script from your client!
+- Available on the [repository](https://tribot.org/repository/)
 
 #### Requirements
 

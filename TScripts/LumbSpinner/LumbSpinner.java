@@ -32,7 +32,7 @@ import java.util.List;
         "<p>Author: TScripts</p>\n\r" +
         "<p>Discuss the script at https://tribot.org/forums/topic/76135-tlumbspinner</p>" +
         "<p>Report bugs/suggestions at https://github.com/Timthebot/TScriptPublicScriptsTribot/issues/new?title=[TLumbSpinner]</a></p>" +
-        "", version = 1.1, category = "Crafting")
+        "", version = 1.2, category = "Crafting")
 public class LumbSpinner extends TScript implements Painting, Starting, Ending {
     @Override
     public void onStart() {
@@ -85,7 +85,7 @@ public class LumbSpinner extends TScript implements Painting, Starting, Ending {
 
         g.setFont(font);
         g.setColor(Color.WHITE);
-        g.drawString("TLumbSpinner v1.1", 20, 30);
+        g.drawString("TLumbSpinner v1.2", 20, 30);
         g.drawString("Status: " + status, 20, 50);
         g.drawString("Runtime: " + Timing.msToString(timeRan), 20, 70);
         g.drawString("Xp Gained: " + xpGained, 20, 90);
