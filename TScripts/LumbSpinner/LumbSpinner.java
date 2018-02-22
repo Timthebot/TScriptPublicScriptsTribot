@@ -14,7 +14,24 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-@ScriptManifest(authors = {"TScripts"}, name = "TLumbSpinner", description = "Spins flax in lumbridge", version = 1.0, category = "Crafting")
+@ScriptManifest(authors = {"TScripts"}, name = "TLumbSpinner", description = "" +
+        "<p>Spins flax into bowstring in Lumbridge.</p>" +
+        "<p>Requirements:</p>" +
+        "<ul>" +
+        "<li>10 crafting</li>" +
+        "<li>Plenty of Flax in bank</li>" +
+        "</ul>" +
+        "<p>Features:</p>" +
+        "<ul>" +
+        "<li>Start anywhere.</li>" +
+        "<li>Attempts to return to Lumbridge when lost</li>" +
+        "<li>Opens door when closed</li>" +
+        "<li>Implements TriBot Anti-Ban Compliance</li>" +
+        "</ul>" +
+        "<p>Author: TScripts</p>\n\r" +
+        "<p>Discuss the script at https://tribot.org/forums/topic/76135-tlumbspinner</p>" +
+        "<p>Report bugs/suggestions at https://github.com/Timthebot/TScriptPublicScriptsTribot/issues/new?title=[TLumbSpinner]</a></p>" +
+        "", version = 1.0, category = "Crafting")
 public class LumbSpinner extends TScript implements Painting, Starting, Ending {
     @Override
     public void onStart() {
