@@ -24,9 +24,10 @@ public class ClimbUpStairs extends TSpinNode {
         walkToIfNeeded(stairtile);
         RSObject[] stairs = Objects.findNearest(15, "Staircase");
         if (stairs.length > 0) {
-            stairs[0].click("Climb-up");
-            idle();
-            Timing.waitCondition(isOnSpinFloor, General.random(3000, 7000));
+            if (stairs[0].click("Climb-up")) {
+                idle();
+                Timing.waitCondition(isOnSpinFloor, General.random(3000, 7000));
+            }
         }
     }
 

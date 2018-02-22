@@ -28,9 +28,10 @@ public class RunToStairs extends TSpinNode {
         } else if (lumbtile.distanceTo(Player.getPosition()) < 10) {
             walkToIfNeeded(insideCastle);
         } else {
-            Magic.selectSpell("Lumbridge Home Teleport");
-            Timing.waitCondition(waitTillInLumbridge, General.random(31000, 35000));
-            System.out.println("Home port!");
+            if (Magic.selectSpell("Lumbridge Home Teleport")) {
+                Timing.waitCondition(waitTillInLumbridge, General.random(31000, 35000));
+                System.out.println("Home port!");
+            }
         }
     }
 

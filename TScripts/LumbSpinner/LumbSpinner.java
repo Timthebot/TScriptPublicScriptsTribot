@@ -14,6 +14,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @ScriptManifest(authors = {"TScripts"}, name = "TLumbSpinner", description = "" +
         "<p>Spins flax into bowstring in Lumbridge.</p>" +
         "<p>Requirements:</p>" +
@@ -31,7 +32,7 @@ import java.util.List;
         "<p>Author: TScripts</p>\n\r" +
         "<p>Discuss the script at https://tribot.org/forums/topic/76135-tlumbspinner</p>" +
         "<p>Report bugs/suggestions at https://github.com/Timthebot/TScriptPublicScriptsTribot/issues/new?title=[TLumbSpinner]</a></p>" +
-        "", version = 1.0, category = "Crafting")
+        "", version = 1.1, category = "Crafting")
 public class LumbSpinner extends TScript implements Painting, Starting, Ending {
     @Override
     public void onStart() {
@@ -84,7 +85,7 @@ public class LumbSpinner extends TScript implements Painting, Starting, Ending {
 
         g.setFont(font);
         g.setColor(Color.WHITE);
-        g.drawString("TLumbSpinner v1.0", 20, 30);
+        g.drawString("TLumbSpinner v1.1", 20, 30);
         g.drawString("Status: " + status, 20, 50);
         g.drawString("Runtime: " + Timing.msToString(timeRan), 20, 70);
         g.drawString("Xp Gained: " + xpGained, 20, 90);

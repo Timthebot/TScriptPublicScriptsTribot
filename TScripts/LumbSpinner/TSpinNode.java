@@ -63,7 +63,18 @@ abstract class TSpinNode extends TNode {
 
 
     // Wait conditions
+
     final Condition waitTillNoFlax = new Condition() {
+        @Override
+        public boolean active() {
+            General.sleep(100);
+            RSItem[] flaxInInv = Inventory.find("Flax");
+            return flaxInInv.length == 0;
+        }
+    };
+
+
+    final Condition waitTillHasFlax = new Condition() {
         @Override
         public boolean active() {
             General.sleep(100);

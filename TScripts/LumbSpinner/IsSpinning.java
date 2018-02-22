@@ -41,7 +41,7 @@ public class IsSpinning extends TSpinNode {
                     Camera.turnToTile(staircase);
                 }
 
-                Timing.waitCondition(waitTillNoFlax, General.random(1000, 3000));
+                Timing.waitCondition(waitTillNoFlax, General.random(2000, 5000));
                 staircase.click("Climb-up");
             }
         }

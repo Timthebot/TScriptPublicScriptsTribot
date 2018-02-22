@@ -28,7 +28,6 @@ public class GoToBank extends TSpinNode {
     @Override
     public void execute() {
         openDoorIfNeeded();
-
         RSObject[] stairs = Objects.findNearest(15, "Staircase");
         if (stairs.length > 0) {
             stairs[0].click("Climb-up");
