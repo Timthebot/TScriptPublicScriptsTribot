@@ -19,13 +19,13 @@ public class Bank extends TSpinNode {
     @Override
     public boolean validate() {
         RSItem[] flaxInInv = Inventory.find(1779);
-        return getFloorInLumbCastle() == 2 && flaxInInv.length != 28;
+        return getFloorInLumbCastle() == 2 && flaxInInv.length == 0;
     }
 
     @Override
     public void execute() {
         if (Banking.isBankScreenOpen()) {
-            if (Banking.find("Flax").length < 28) {
+            if (Banking.find("Flax").length < 1) {
                 System.out.println("Should logout!");
                 Login.logout();
                 parent.endScript();

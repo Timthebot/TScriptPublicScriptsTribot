@@ -18,7 +18,7 @@ public class GoToSpinWheel extends TSpinNode {
     @Override
     public boolean validate() {
         RSItem[] flaxInInv = Inventory.find(1779);
-        return flaxInInv.length == 28 && getFloorInLumbCastle() == 2;
+        return flaxInInv.length != 0 && getFloorInLumbCastle() == 2;
     }
 
     private static final RSTile target = new RSTile(3205, 3209, 2);
