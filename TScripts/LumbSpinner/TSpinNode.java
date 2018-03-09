@@ -21,8 +21,8 @@ abstract class TSpinNode extends TNode {
 
 
     private Polygon lumbTopFloors = new Polygon(
-            new int[]{3205, 3214, 3214, 3205},
-            new int[]{3229, 3229, 3208, 3208},
+            new int[]{3204, 3214, 3214, 3204},
+            new int[]{3230, 3230, 3208, 3208},
             4);
 
 
@@ -50,13 +50,13 @@ abstract class TSpinNode extends TNode {
     }
 
     boolean isSpinInterfaceOpen() {
-        RSInterfaceChild inter = Interfaces.get(459, 1);
+        RSInterfaceChild inter = Interfaces.get(270, 5);
+        System.out.println("Checking interface");
         if (inter != null && !inter.isHidden()) {
-            RSInterfaceComponent child = inter.getChild(1);
-            if (child != null) {
-                String text = child.getText();
-                return text != null && text.contains("What would you like to spin");
-            }
+            String text = inter.getText();
+            System.out.println(text);
+            return text != null && text.contains("What would you like to spin");
+
         }
         return false;
     }

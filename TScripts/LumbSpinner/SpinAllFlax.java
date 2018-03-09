@@ -2,6 +2,7 @@ package scripts.TScripts.LumbSpinner;
 
 import org.tribot.api.General;
 import org.tribot.api.Timing;
+import org.tribot.api.input.Keyboard;
 import org.tribot.api.util.abc.ABCUtil;
 import org.tribot.api2007.Interfaces;
 import org.tribot.api2007.Inventory;
@@ -23,9 +24,15 @@ public class SpinAllFlax extends TSpinNode {
 
     @Override
     public void execute() {
-        RSInterfaceChild inter = Interfaces.get(459, 4);
+        RSInterfaceChild inter = Interfaces.get(270, 12);
         if (inter != null) {
-            if (inter.click("Spin-All")) {
+            RSInterfaceComponent comp = inter.getChild(9);
+            if (comp != null) {
+                String text = comp.getText();
+                if (!text.contains("ffffff")) {
+                    comp.click();
+                }
+                Keyboard.holdKey('3', 51, isAnimating);
                 Timing.waitCondition(isAnimating, General.random(1000, 3000));
             }
         }

@@ -4,10 +4,7 @@ import org.tribot.api.General;
 import org.tribot.api.Timing;
 import org.tribot.api.types.generic.Condition;
 import org.tribot.api.util.abc.ABCUtil;
-import org.tribot.api2007.Camera;
-import org.tribot.api2007.Inventory;
-import org.tribot.api2007.Objects;
-import org.tribot.api2007.Player;
+import org.tribot.api2007.*;
 import org.tribot.api2007.types.RSItem;
 import org.tribot.api2007.types.RSObject;
 
@@ -24,6 +21,7 @@ public class IsSpinning extends TSpinNode {
     @Override
     public void execute() {
         idle();
+
         RSItem[] flaxLeft = Inventory.find("Flax");
         if (flaxLeft.length > 1) {
             // We still have move flax to go, so wait for animation to go -1
@@ -42,7 +40,9 @@ public class IsSpinning extends TSpinNode {
                 }
 
                 Timing.waitCondition(waitTillNoFlax, General.random(2000, 5000));
+                openDoorIfNeeded();
                 staircase.click("Climb-up");
+                Timing.waitCondition(isOnTopFloor, General.random(3000, 7000));
             }
         }
 

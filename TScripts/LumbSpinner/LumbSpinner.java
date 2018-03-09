@@ -2,9 +2,11 @@ package scripts.TScripts.LumbSpinner;
 
 import org.tribot.api.Timing;
 import org.tribot.api.util.abc.ABCUtil;
+import org.tribot.api2007.Login;
 import org.tribot.api2007.Skills;
 import org.tribot.script.ScriptManifest;
 import org.tribot.script.interfaces.Ending;
+import org.tribot.script.interfaces.MessageListening07;
 import org.tribot.script.interfaces.Painting;
 import org.tribot.script.interfaces.Starting;
 import scripts.TScripts.core.TScript;
@@ -24,6 +26,8 @@ import java.util.List;
         "</ul>" +
         "<p>Features:</p>" +
         "<ul>" +
+        "<li>Updated to work with new interfaces released on 08/03/2018!</li>" +
+        "<li>The fastest flax spinner, uses keyboard for new-style interfaces.</li>" +
         "<li>Start anywhere.</li>" +
         "<li>Attempts to return to Lumbridge when lost</li>" +
         "<li>Opens door when closed</li>" +
@@ -33,7 +37,7 @@ import java.util.List;
         "<p>Discuss the script at https://tribot.org/forums/topic/76135-tlumbspinner</p>" +
         "<p>Report bugs/suggestions at https://github.com/Timthebot/TScriptPublicScriptsTribot/issues/new?title=[TLumbSpinner]</a></p>" +
         "", version = 1.2, category = "Crafting")
-public class LumbSpinner extends TScript implements Painting, Starting, Ending {
+public class LumbSpinner extends TScript implements Painting, Starting, Ending, MessageListening07 {
     @Override
     public void onStart() {
         // Executes once at the start
@@ -48,7 +52,7 @@ public class LumbSpinner extends TScript implements Painting, Starting, Ending {
         nodes.add(new OpenSpinInterface(abc2));
         nodes.add(new SpinAllFlax(abc2));
         nodes.add(new GoToBank(abc2));
-        nodes.add(new Bank(abc2));
+        nodes.add(new Bank(abc2, this));
         nodes.add(new GoToSpinWheel(abc2));
 
         startCraftXp = Skills.getXP(Skills.SKILLS.CRAFTING);
@@ -100,5 +104,41 @@ public class LumbSpinner extends TScript implements Painting, Starting, Ending {
     @Override
     public void onEnd() {
         System.out.println("Thank you for using TLumbSpinner!");
+    }
+
+
+    @Override
+    public void playerMessageReceived(String s, String s1) {
+
+    }
+
+    @Override
+    public void duelRequestReceived(String s, String s1) {
+
+    }
+
+    @Override
+    public void tradeRequestReceived(String s) {
+
+    }
+
+    @Override
+    public void serverMessageReceived(String s) {
+        if (s.contains("You need to wait another ")) {
+            System.err.println("ERROR: Unable to home port and lost, shutting down script!");
+            Login.logout();
+            endScript();
+        }
+
+    }
+
+    @Override
+    public void clanMessageReceived(String s, String s1) {
+
+    }
+
+    @Override
+    public void personalMessageReceived(String s, String s1) {
+
     }
 }

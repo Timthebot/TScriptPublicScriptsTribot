@@ -17,7 +17,7 @@ public abstract class TScript extends Script {
         }
     }
 
-    protected void endScript() {
+    public void endScript() {
         // Script will end once called
         shouldStop = true;
     }
