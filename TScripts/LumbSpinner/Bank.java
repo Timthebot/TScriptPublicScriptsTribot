@@ -22,6 +22,11 @@ public class Bank extends TSpinNode {
     @Override
     public void execute() {
         if (Banking.isBankScreenOpen()) {
+            if (Banking.find("Flax").length < 28) {
+                System.out.println("Should logout!");
+                
+            }
+
             if (Inventory.getAll().length > 0) {
                 Banking.depositAll();
             }
