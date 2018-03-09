@@ -21,8 +21,8 @@ abstract class TSpinNode extends TNode {
 
 
     private Polygon lumbTopFloors = new Polygon(
-            new int[]{3205, 3214, 3214, 3205},
-            new int[]{3229, 3229, 3208, 3208},
+            new int[]{3204, 3214, 3214, 3204},
+            new int[]{3230, 3230, 3208, 3208},
             4);
 
 
