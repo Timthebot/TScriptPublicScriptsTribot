@@ -26,6 +26,8 @@ import java.util.List;
         "</ul>" +
         "<p>Features:</p>" +
         "<ul>" +
+        "<li>Updated to work with new interfaces released on 08/03/2018!</li>" +
+        "<li>The fastest flax spinner, uses keyboard for new-style interfaces.</li>" +
         "<li>Start anywhere.</li>" +
         "<li>Attempts to return to Lumbridge when lost</li>" +
         "<li>Opens door when closed</li>" +
@@ -34,7 +36,7 @@ import java.util.List;
         "<p>Author: TScripts</p>\n\r" +
         "<p>Discuss the script at https://tribot.org/forums/topic/76135-tlumbspinner</p>" +
         "<p>Report bugs/suggestions at https://github.com/Timthebot/TScriptPublicScriptsTribot/issues/new?title=[TLumbSpinner]</a></p>" +
-        "", version = 1.1, category = "Crafting")
+        "", version = 1.2, category = "Crafting")
 public class LumbSpinner extends TScript implements Painting, Starting, Ending, MessageListening07 {
     @Override
     public void onStart() {
