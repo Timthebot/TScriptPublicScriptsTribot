@@ -50,13 +50,13 @@ abstract class TSpinNode extends TNode {
     }
 
     boolean isSpinInterfaceOpen() {
-        RSInterfaceChild inter = Interfaces.get(459, 1);
+        RSInterfaceChild inter = Interfaces.get(270, 5);
+        System.out.println("Checking interface");
         if (inter != null && !inter.isHidden()) {
-            RSInterfaceComponent child = inter.getChild(1);
-            if (child != null) {
-                String text = child.getText();
-                return text != null && text.contains("What would you like to spin");
-            }
+            String text = inter.getText();
+            System.out.println(text);
+            return text != null && text.contains("What would you like to spin");
+
         }
         return false;
     }
