@@ -48,7 +48,7 @@ public class LumbSpinner extends TScript implements Painting, Starting, Ending {
         nodes.add(new OpenSpinInterface(abc2));
         nodes.add(new SpinAllFlax(abc2));
         nodes.add(new GoToBank(abc2));
-        nodes.add(new Bank(abc2));
+        nodes.add(new Bank(abc2, this));
         nodes.add(new GoToSpinWheel(abc2));
 
         startCraftXp = Skills.getXP(Skills.SKILLS.CRAFTING);

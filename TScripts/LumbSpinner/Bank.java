@@ -6,11 +6,14 @@ import org.tribot.api.types.generic.Condition;
 import org.tribot.api.util.abc.ABCUtil;
 import org.tribot.api2007.Banking;
 import org.tribot.api2007.Inventory;
+import org.tribot.api2007.Login;
 import org.tribot.api2007.types.RSItem;
+import scripts.TScripts.core.TScript;
 
 public class Bank extends TSpinNode {
-    public Bank(ABCUtil abc2) {
+    public Bank(ABCUtil abc2, TScript parent) {
         super("Banking", abc2);
+        this.parent = parent;
     }
 
     @Override
@@ -24,16 +27,17 @@ public class Bank extends TSpinNode {
         if (Banking.isBankScreenOpen()) {
             if (Banking.find("Flax").length < 28) {
                 System.out.println("Should logout!");
-                
-            }
-
-            if (Inventory.getAll().length > 0) {
-                Banking.depositAll();
-            }
-            if (Banking.withdraw(0, "Flax")) {
-                Timing.waitCondition(waitTillHasFlax, General.random(1000, 4000));
+                Login.logout();
+                parent.endScript();
             } else {
-                System.err.println("Encountered problem banking");
+                if (Inventory.getAll().length > 0) {
+                    Banking.depositAll();
+                }
+                if (Banking.withdraw(0, "Flax")) {
+                    Timing.waitCondition(waitTillHasFlax, General.random(1000, 4000));
+                } else {
+                    System.err.println("Encountered problem banking");
+                }
             }
         } else {
             if (Banking.openBank()) {
@@ -49,5 +53,7 @@ public class Bank extends TSpinNode {
             return Banking.isBankScreenOpen();
         }
     };
+
+    private TScript parent;
 
 }
