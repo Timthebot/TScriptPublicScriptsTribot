@@ -5,10 +5,12 @@ import org.tribot.api.Timing;
 import org.tribot.api.types.generic.Condition;
 import org.tribot.api.util.abc.ABCUtil;
 import org.tribot.api2007.Magic;
+import org.tribot.api2007.MessageListener;
 import org.tribot.api2007.Objects;
 import org.tribot.api2007.Player;
 import org.tribot.api2007.types.RSObject;
 import org.tribot.api2007.types.RSTile;
+import org.tribot.script.interfaces.MessageListening07;
 
 
 public class RunToStairs extends TSpinNode {
@@ -29,8 +31,15 @@ public class RunToStairs extends TSpinNode {
             walkToIfNeeded(insideCastle);
         } else {
             if (Magic.selectSpell("Lumbridge Home Teleport")) {
-                Timing.waitCondition(waitTillInLumbridge, General.random(31000, 35000));
-                System.out.println("Home port!");
+                Timing.waitCondition(isAnimating, General.random(1000, 3000));
+                if (isAnimating.active()) {
+                    Timing.waitCondition(waitTillInLumbridge, General.random(31000, 35000));
+                    System.out.println("Home port!");
+                } else {
+                    System.out.println("Home port failed!");
+                }
+
+
             }
         }
     }
@@ -45,4 +54,5 @@ public class RunToStairs extends TSpinNode {
             return lumbtile.distanceTo(Player.getPosition()) < 10;
         }
     };
+
 }

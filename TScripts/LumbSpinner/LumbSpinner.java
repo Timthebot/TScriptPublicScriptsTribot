@@ -2,9 +2,11 @@ package scripts.TScripts.LumbSpinner;
 
 import org.tribot.api.Timing;
 import org.tribot.api.util.abc.ABCUtil;
+import org.tribot.api2007.Login;
 import org.tribot.api2007.Skills;
 import org.tribot.script.ScriptManifest;
 import org.tribot.script.interfaces.Ending;
+import org.tribot.script.interfaces.MessageListening07;
 import org.tribot.script.interfaces.Painting;
 import org.tribot.script.interfaces.Starting;
 import scripts.TScripts.core.TScript;
@@ -33,7 +35,7 @@ import java.util.List;
         "<p>Discuss the script at https://tribot.org/forums/topic/76135-tlumbspinner</p>" +
         "<p>Report bugs/suggestions at https://github.com/Timthebot/TScriptPublicScriptsTribot/issues/new?title=[TLumbSpinner]</a></p>" +
         "", version = 1.1, category = "Crafting")
-public class LumbSpinner extends TScript implements Painting, Starting, Ending {
+public class LumbSpinner extends TScript implements Painting, Starting, Ending, MessageListening07 {
     @Override
     public void onStart() {
         // Executes once at the start
@@ -100,5 +102,41 @@ public class LumbSpinner extends TScript implements Painting, Starting, Ending {
     @Override
     public void onEnd() {
         System.out.println("Thank you for using TLumbSpinner!");
+    }
+
+
+    @Override
+    public void playerMessageReceived(String s, String s1) {
+
+    }
+
+    @Override
+    public void duelRequestReceived(String s, String s1) {
+
+    }
+
+    @Override
+    public void tradeRequestReceived(String s) {
+
+    }
+
+    @Override
+    public void serverMessageReceived(String s) {
+        if (s.contains("You need to wait another ")) {
+            System.err.println("ERROR: Unable to home port and lost, shutting down script!");
+            Login.logout();
+            endScript();
+        }
+
+    }
+
+    @Override
+    public void clanMessageReceived(String s, String s1) {
+
+    }
+
+    @Override
+    public void personalMessageReceived(String s, String s1) {
+
     }
 }
