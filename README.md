@@ -23,6 +23,8 @@ This repository contains all public, open-sourced scripts by [TScripts](https://
 
 #### Bugs
 
-- No bugs currently reported
+- Can get stuck trying to open the door 
+- If misclicks tutor, just spams "3" and gets stuck
+- Filling the chatbox with 3 is undesirable
 
 [Submit a bug report](https://github.com/Timthebot/TScriptPublicScriptsTribot/issues/new?title=[TLumbSpinner])
